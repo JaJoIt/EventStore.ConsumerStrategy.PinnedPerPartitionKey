@@ -19,22 +19,9 @@ namespace EventStore.ConsumerStrategy.PinnedPerPartitionKey
             _hash = hasher;
         }
 
-        public string Name
+        public string Name => "PinnedPerPartitionKey";
 
-        {
-            get { return "PinnedPerPartitionKey"; }
-        }
-
-        public int AvailableCapacity
-        {
-            get
-            {
-                if (_state == null)
-                    return 0;
-
-                return _state.AvailableCapacity;
-            }
-        }
+        public int AvailableCapacity => _state?.AvailableCapacity ?? 0;
 
         public void ClientAdded(PersistentSubscriptionClient client)
         {
